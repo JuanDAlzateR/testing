@@ -9,7 +9,7 @@
       "type": "string"
     },
     "elevation": {
-      "type": "integer"
+      "type": "number"
     },
     "timezone": {
       "type": "string"
@@ -30,7 +30,7 @@
           "type": "string"
         },
         "temperature": {
-          "type": "integer"
+          "type": "number"
         },
         "wind": {
           "type": "object",
@@ -39,7 +39,7 @@
               "type": "number"
             },
             "angle": {
-              "type": "integer"
+              "type": "number"
             },
             "dir": {
               "type": "string"
@@ -55,7 +55,7 @@
           "type": "object",
           "properties": {
             "total": {
-              "type": "integer"
+              "type": "number"
             },
             "type": {
               "type": "string"

@@ -1,8 +1,8 @@
 [
   {
     "sections":"current%2Chourly",
-    "lat": "${place.latitude}",
-    "lon":"${place.longitude}",
+    "lat": "${latitude}",
+    "lon":"${longitude}",
     "language":"en",
     "units":"auto",
     "key": "${APIkey}"
