@@ -1,0 +1,10 @@
+[
+  {
+    "sections":"current%2Chourly",
+    "lat": "${latitude}",
+    "lon":"${longitude}",
+    "language":"en",
+    "units":"auto",
+    "key": "${APIkey}"
+  }
+]
