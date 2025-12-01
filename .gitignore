@@ -5,6 +5,7 @@ out/
 .idea/
 target/
 config/
+.env
 
 ### Eclipse ###
 .apt_generated
