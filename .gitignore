@@ -7,6 +7,9 @@ target/
 config/
 .env
 
+#carina testNG
+reports/
+
 ### Eclipse ###
 .apt_generated
 .classpath
