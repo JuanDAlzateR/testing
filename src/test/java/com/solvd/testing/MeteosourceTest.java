@@ -20,13 +20,13 @@ public class MeteosourceTest implements IAbstractTest {
     public void loadAPIKey() {
         if (apiKey.equals("")) {
             dotenv = Dotenv.load();
-            apiKey = dotenv.get("API_KEY");
+            apiKey = dotenv.get("METEO_API_KEY");
         }
     }
 
     // ======= DECLARATIVE TESTS (DECLARATIVE APPROACH) ==========
 
-    @Test(testName = "Verify weather info response", description = "verifies weather info response")
+    @Test(testName = "Verify current weather info response", description = "verifies weather info response")
     public void testGetCurrentWeather() {
         Place place = new Place("Medellin", "6.265643", "-75.574925");
         AbstractApiMethodV2 api = createWeatherAPIMethod(place, "current");
@@ -59,7 +59,7 @@ public class MeteosourceTest implements IAbstractTest {
         api.validateResponseAgainstSchema("api/weather/rsDaily.schema");
     }
 
-    @Test(testName = "Verify API needs key", description = "verifies that the Meteo API needs a key")
+    @Test(testName = "Verify API needs a key", description = "verifies that the Meteo API needs a key")
     public void testKeyIsNeeded() {
         Place place = new Place("Medellin", "6.265643", "-75.574925");
         AbstractApiMethodV2 api = createWeatherAPIMethod(place, "current");
@@ -100,7 +100,7 @@ public class MeteosourceTest implements IAbstractTest {
     /**
      * Creates an abstract API method, using a template factory for IMeteosource
      *
-     * @param place place to consult weather (coordinates)
+     * @param place place with coordinates to consult nearest place
      * @return AbstractApiMethodV2
      */
     public AbstractApiMethodV2 createNearestPlaceAPIMethod(Place place) {

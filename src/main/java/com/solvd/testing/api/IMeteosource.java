@@ -9,7 +9,7 @@ import com.zebrunner.carina.api.http.HttpMethodType;
 import com.zebrunner.carina.api.http.HttpResponseStatusType;
 
 // https://www.meteosource.com/api/v1/free/point?lat=2&lon=5&sections=current%2Chourly&language=en&units=auto&key=
-@EndpointTemplate(url = "https://www.meteosource.com/api/v1/free")
+@EndpointTemplate(url = "${config.env.base}")
 public interface IMeteosource {
 
     @EndpointTemplateMethod(url = "point?language=en&units=auto", methodType = HttpMethodType.GET)
