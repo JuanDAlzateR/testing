@@ -2,10 +2,7 @@ package com.solvd.testing;
 
 import com.solvd.testing.api.GetNearestPlace;
 import com.solvd.testing.api.GetWeatherInfo;
-import com.solvd.testing.api.IMeteosource;
 import com.solvd.testing.api.Place;
-import com.zebrunner.carina.api.AbstractApiMethodV2;
-import com.zebrunner.carina.api.binding.TemplateFactory;
 import com.zebrunner.carina.api.http.HttpResponseStatusType;
 import com.zebrunner.carina.core.IAbstractTest;
 import io.github.cdimascio.dotenv.Dotenv;
