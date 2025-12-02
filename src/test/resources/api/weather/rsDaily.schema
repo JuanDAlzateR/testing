@@ -1,0 +1,168 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "lat": {
+      "type": "string"
+    },
+    "lon": {
+      "type": "string"
+    },
+    "elevation": {
+      "type": "integer"
+    },
+    "timezone": {
+      "type": "string"
+    },
+    "units": {
+      "type": "string"
+    },
+    "current": {
+      "type": "null"
+    },
+    "hourly": {
+      "type": "null"
+    },
+    "daily": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "day": {
+                "type": "string"
+              },
+              "weather": {
+                "type": "string"
+              },
+              "icon": {
+                "type": "integer"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "all_day": {
+                "type": "object",
+                "properties": {
+                  "weather": {
+                    "type": "string"
+                  },
+                  "icon": {
+                    "type": "integer"
+                  },
+                  "temperature": {
+                    "type": "number"
+                  },
+                  "temperature_min": {
+                    "type": [
+                      "integer",
+                      "number"
+                    ]
+                  },
+                  "temperature_max": {
+                    "type": [
+                      "number",
+                      "integer"
+                    ]
+                  },
+                  "wind": {
+                    "type": "object",
+                    "properties": {
+                      "speed": {
+                        "type": [
+                          "number",
+                          "integer"
+                        ]
+                      },
+                      "dir": {
+                        "type": "string"
+                      },
+                      "angle": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "speed",
+                      "dir",
+                      "angle"
+                    ]
+                  },
+                  "cloud_cover": {
+                    "type": "object",
+                    "properties": {
+                      "total": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "total"
+                    ]
+                  },
+                  "precipitation": {
+                    "type": "object",
+                    "properties": {
+                      "total": {
+                        "type": "number"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "total",
+                      "type"
+                    ]
+                  }
+                },
+                "required": [
+                  "weather",
+                  "icon",
+                  "temperature",
+                  "temperature_min",
+                  "temperature_max",
+                  "wind",
+                  "cloud_cover",
+                  "precipitation"
+                ]
+              },
+              "morning": {
+                "type": "null"
+              },
+              "afternoon": {
+                "type": "null"
+              },
+              "evening": {
+                "type": "null"
+              }
+            },
+            "required": [
+              "day",
+              "weather",
+              "icon",
+              "summary",
+              "all_day",
+              "morning",
+              "afternoon",
+              "evening"
+            ]
+          }
+        }
+      },
+      "required": [
+        "data"
+      ]
+    }
+  },
+  "required": [
+    "lat",
+    "lon",
+    "elevation",
+    "timezone",
+    "units",
+    "current",
+    "hourly",
+    "daily"
+  ]
+}
