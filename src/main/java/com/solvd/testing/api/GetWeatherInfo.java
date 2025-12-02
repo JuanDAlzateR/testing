@@ -9,7 +9,7 @@ import com.zebrunner.carina.api.http.HttpMethodType;
 @Endpoint(url = "https://www.meteosource.com/api/v1/free/point?language=en&units=auto", methodType = HttpMethodType.GET)
 public class GetWeatherInfo extends AbstractApiMethodV2 {
     public GetWeatherInfo() {
-      //  super(null, "api/weather/rs.json", "api/weather/weather.properties");
-      // replaceUrlPlaceholder("base_url", Configuration.getRequired("api_url"));
+        //  super(null, "api/weather/rs.json", "api/weather/weather.properties");
+        // replaceUrlPlaceholder("base_url", Configuration.getRequired("api_url"));
     }
 }
