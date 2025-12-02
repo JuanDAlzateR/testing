@@ -9,7 +9,7 @@
       "type": "string"
     },
     "elevation": {
-      "type": "number"
+      "type": "integer"
     },
     "timezone": {
       "type": "string"
@@ -18,67 +18,7 @@
       "type": "string"
     },
     "current": {
-      "type": "object",
-      "properties": {
-        "icon": {
-          "type": "string"
-        },
-        "icon_num": {
-          "type": "integer"
-        },
-        "summary": {
-          "type": "string"
-        },
-        "temperature": {
-          "type": "number"
-        },
-        "wind": {
-          "type": "object",
-          "properties": {
-            "speed": {
-              "type": "number"
-            },
-            "angle": {
-              "type": "number"
-            },
-            "dir": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "speed",
-            "angle",
-            "dir"
-          ]
-        },
-        "precipitation": {
-          "type": "object",
-          "properties": {
-            "total": {
-              "type": "number"
-            },
-            "type": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "total",
-            "type"
-          ]
-        },
-        "cloud_cover": {
-          "type": "integer"
-        }
-      },
-      "required": [
-        "icon",
-        "icon_num",
-        "summary",
-        "temperature",
-        "wind",
-        "precipitation",
-        "cloud_cover"
-      ]
+      "type": "null"
     },
     "hourly": {
       "type": "object",
@@ -101,19 +41,13 @@
                 "type": "string"
               },
               "temperature": {
-                "type": [
-                  "integer",
-                  "number"
-                ]
+                "type": "number"
               },
               "wind": {
                 "type": "object",
                 "properties": {
                   "speed": {
-                    "type": [
-                      "number",
-                      "integer"
-                    ]
+                    "type": "number"
                   },
                   "dir": {
                     "type": "string"
@@ -143,10 +77,7 @@
                 "type": "object",
                 "properties": {
                   "total": {
-                    "type": [
-                      "integer",
-                      "number"
-                    ]
+                    "type": "number"
                   },
                   "type": {
                     "type": "string"

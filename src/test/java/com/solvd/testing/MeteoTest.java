@@ -2,7 +2,10 @@ package com.solvd.testing;
 
 import com.solvd.testing.api.GetNearestPlace;
 import com.solvd.testing.api.GetWeatherInfo;
+import com.solvd.testing.api.IMeteosource;
 import com.solvd.testing.api.Place;
+import com.zebrunner.carina.api.AbstractApiMethodV2;
+import com.zebrunner.carina.api.binding.TemplateFactory;
 import com.zebrunner.carina.api.http.HttpResponseStatusType;
 import com.zebrunner.carina.core.IAbstractTest;
 import io.github.cdimascio.dotenv.Dotenv;
@@ -45,7 +48,7 @@ public class MeteoTest implements IAbstractTest {
         Place place = new Place("Medellin", "6.265643", "-75.574925");
         getWeatherInfo.addParameter("lat", place.getLatitude());
         getWeatherInfo.addParameter("lon", place.getLongitude());
-        getWeatherInfo.addParameter("sections", "current,hourly");
+        getWeatherInfo.addParameter("sections", "hourly");
         getWeatherInfo.addParameter("key", apiKey);
         getWeatherInfo.expectResponseStatus(HttpResponseStatusType.OK_200);
         getWeatherInfo.callAPI();
@@ -83,7 +86,7 @@ public class MeteoTest implements IAbstractTest {
     public void verifyGetNearestPlaceTest() {
 
         GetNearestPlace getNearestPlace = new GetNearestPlace();
-        Place place = new Place("undentified", "6.265643", "-75.574925");
+        Place place = new Place("unidentified place", "6.265643", "-75.574925");
         getNearestPlace.addParameter("lat", place.getLatitude());
         getNearestPlace.addParameter("lon", place.getLongitude());
         getNearestPlace.addParameter("key", apiKey);
@@ -91,4 +94,5 @@ public class MeteoTest implements IAbstractTest {
         getNearestPlace.callAPI();
         getNearestPlace.validateResponse();
     }
+
 }
