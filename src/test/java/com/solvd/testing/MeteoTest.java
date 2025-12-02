@@ -20,11 +20,11 @@ public class MeteoTest implements IAbstractTest {
     public void loadAPIKey() {
         if (apiKey.equals("")) {
             dotenv = Dotenv.load();
-            apiKey = dotenv.get("API_KEY");
+            apiKey = dotenv.get("METEO_API_KEY");
         }
     }
 
-    @Test(testName = "Verify weather info response", description = "verifies weather info response")
+    @Test(testName = "Verify current weather info response", description = "verifies weather info response")
     public void verifyGetCurrentWeatherTest() {
 
         GetWeatherInfo getWeatherInfo = new GetWeatherInfo();
@@ -45,7 +45,7 @@ public class MeteoTest implements IAbstractTest {
         Place place = new Place("Medellin", "6.265643", "-75.574925");
         getWeatherInfo.addParameter("lat", place.getLatitude());
         getWeatherInfo.addParameter("lon", place.getLongitude());
-        getWeatherInfo.addParameter("sections", "current,hourly");
+        getWeatherInfo.addParameter("sections", "hourly");
         getWeatherInfo.addParameter("key", apiKey);
         getWeatherInfo.expectResponseStatus(HttpResponseStatusType.OK_200);
         getWeatherInfo.callAPI();
@@ -66,7 +66,7 @@ public class MeteoTest implements IAbstractTest {
         getWeatherInfo.validateResponseAgainstSchema("api/weather/rsDaily.schema");
     }
 
-    @Test(testName = "Verify API needs key", description = "verifies that the Meteo API needs a key")
+    @Test(testName = "Verify API needs a key", description = "verifies that the Meteo API needs a key")
     public void verifyKeyIsNeededTest() {
 
         GetWeatherInfo getWeatherInfo = new GetWeatherInfo();
@@ -83,7 +83,7 @@ public class MeteoTest implements IAbstractTest {
     public void verifyGetNearestPlaceTest() {
 
         GetNearestPlace getNearestPlace = new GetNearestPlace();
-        Place place = new Place("undentified", "6.265643", "-75.574925");
+        Place place = new Place("unidentified place", "6.265643", "-75.574925");
         getNearestPlace.addParameter("lat", place.getLatitude());
         getNearestPlace.addParameter("lon", place.getLongitude());
         getNearestPlace.addParameter("key", apiKey);
@@ -91,4 +91,5 @@ public class MeteoTest implements IAbstractTest {
         getNearestPlace.callAPI();
         getNearestPlace.validateResponse();
     }
+
 }
