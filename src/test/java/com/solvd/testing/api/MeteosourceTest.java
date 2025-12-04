@@ -1,6 +1,5 @@
-package com.solvd.testing;
+package com.solvd.testing.api;
 
-import com.solvd.testing.api.*;
 import com.zebrunner.carina.api.AbstractApiMethodV2;
 import com.zebrunner.carina.api.binding.TemplateFactory;
 import com.zebrunner.carina.api.http.HttpResponseStatusType;
