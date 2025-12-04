@@ -1,8 +1,5 @@
-package com.solvd.testing;
+package com.solvd.testing.api;
 
-import com.solvd.testing.api.GetNearestPlace;
-import com.solvd.testing.api.GetWeatherInfo;
-import com.solvd.testing.api.Place;
 import com.zebrunner.carina.api.http.HttpResponseStatusType;
 import com.zebrunner.carina.core.IAbstractTest;
 import io.github.cdimascio.dotenv.Dotenv;
