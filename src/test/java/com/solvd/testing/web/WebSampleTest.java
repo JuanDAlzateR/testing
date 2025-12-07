@@ -5,6 +5,7 @@ import com.solvd.testing.gui.pages.desktop.HomePage;
 
 import com.zebrunner.carina.core.IAbstractTest;
 
+import com.zebrunner.carina.utils.common.CommonUtils;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -55,6 +56,15 @@ public class WebSampleTest implements IAbstractTest {
 
     }
 
+    @Test
+    public void filterSearch(){
+        HomePage homePage =new HomePage(getDriver());
+        TopMenuComponent topMenuComponent= new TopMenuComponent(getDriver());
+        homePage.open();
+        topMenuComponent.useSearchBar("Java");
+        homePage.clickLevel();
+        CommonUtils.pause(10);
+    }
 
 
 
