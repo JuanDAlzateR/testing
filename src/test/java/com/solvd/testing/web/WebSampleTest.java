@@ -6,9 +6,16 @@ import com.solvd.testing.gui.pages.desktop.CoursePage;
 import com.solvd.testing.gui.pages.desktop.HomePage;
 
 import com.solvd.testing.gui.pages.desktop.SearchPage;
+import com.solvd.testing.gui.pages.desktop.UniversitiesPage;
 import com.zebrunner.carina.core.IAbstractTest;
 
 import com.zebrunner.carina.utils.common.CommonUtils;
+import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -16,22 +23,24 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.time.Duration;
+import java.util.List;
 
 
 public class WebSampleTest implements IAbstractTest {
 
-    @Test
-    public void verifyHomePage() {
+    public static final Logger LOGGER = LogManager.getLogger(WebSampleTest.class);
+
+    @Test(testName = "Verify Home Page", description = "verifies that the home page loads")
+    public void verifyHomePageLoads() {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
     }
 
-    @Test
-    public void verifySearchBar() {
+    @Test(testName = "Verify search", description = "verifies search bar correct functionality")
+    public void verifySearchBarFunctionality() {
         HomePage homePage = new HomePage(getDriver());
-//        getDriver().manage().window().setSize(new Dimension(1280, 800));
-//        getDriver().manage().window().setPosition(new Point(550, 300));
+
         homePage.open();
         TopMenuComponent topMenuComponent = new TopMenuComponent(getDriver());
         topMenuComponent.useSearchBar("Java Programming");
@@ -48,8 +57,8 @@ public class WebSampleTest implements IAbstractTest {
     }
 
 
-    @Test
-    public void verifyExplore() {
+    @Test(testName = "Verify explore hover", description = "verifies explore hover and the correct functionality of a link")
+    public void verifyExploreHoverAndLink() {
         HomePage homePage = new HomePage(getDriver());
         TopMenuComponent topMenuComponent = new TopMenuComponent(getDriver());
         homePage.open();
@@ -61,8 +70,8 @@ public class WebSampleTest implements IAbstractTest {
                 "ERROR:the link doesn't contain computer-science: " + currentUrl);
     }
 
-    @Test
-    public void filterSearch() {
+    @Test(testName = "Verify filter search", description = "verifies search bar and filter by level")
+    public void verifyFilterSearchByLevel() {
         HomePage homePage = new HomePage(getDriver());
         TopMenuComponent topMenuComponent = new TopMenuComponent(getDriver());
         SearchPage searchPage = new SearchPage(getDriver());
@@ -81,8 +90,8 @@ public class WebSampleTest implements IAbstractTest {
         sa.assertAll();
     }
 
-    @Test
-    public void searchCourse() {
+    @Test(testName = "Verify course search", description = "verifies search bar, opening the first result and important info of the course is in fact present")
+    public void verifyCourseSearchAndDisplayInformation() {
         HomePage homePage = new HomePage(getDriver());
         TopMenuComponent topMenuComponent = new TopMenuComponent(getDriver());
         SearchPage searchPage = new SearchPage(getDriver());
@@ -121,8 +130,8 @@ public class WebSampleTest implements IAbstractTest {
         sa.assertAll();
     }
 
-    @Test
-    public void logIn() {
+    @Test(testName = "Verify login popup", description = "verifies input and buttons for login, and warning for invalid account")
+    public void verifyLogInPopUpInputAndCorrectDenyAccess() {
         HomePage homePage = new HomePage(getDriver());
         TopMenuComponent topMenuComponent = new TopMenuComponent(getDriver());
         LogInComponent loginComponent = new LogInComponent(getDriver());
@@ -147,6 +156,84 @@ public class WebSampleTest implements IAbstractTest {
         sa.assertAll();
     }
 
+    @Test(testName = "Verify universities page", description = "verifies universities page button and correct scroll")
+    public void verifyUniversitiesPageLinkAndScroll() {
+        HomePage homePage = new HomePage(getDriver());
+        TopMenuComponent topMenuComponent = new TopMenuComponent(getDriver());
+        UniversitiesPage universitiesPage = new UniversitiesPage(getDriver());
+        homePage.open();
+        topMenuComponent.clickUniversities();
+        LOGGER.info("start:");
+        Boolean bool=universitiesPage.linkedInButtonVisible();
+        LOGGER.info("finish:");
+        String currentUrl = getDriver().getCurrentUrl();
+        SoftAssert sa = new SoftAssert();
+        sa.assertTrue(currentUrl.contains("www.coursera.org/campus"),
+                "ERROR: campus doesn't show in the URL: " + currentUrl);
 
+        sa.assertTrue(!universitiesPage.linkedInButtonVisible(), "ERROR: LinkedIn button is visible at the top of the page");
+        universitiesPage.scrollToLinkedInButton();
+
+        sa.assertTrue(universitiesPage.linkedInButtonVisible(), "ERROR: LinkedIn button is not visible at the bottom of the page");
+        sa.assertAll();
+    }
+
+    @Test(testName = "Verify window size", description = "verifies window correct functionality")
+    public void verifyChangeOfBrowserWindowSize() {
+        HomePage homePage = new HomePage(getDriver());
+        getDriver().manage().window().setSize(new Dimension(1280, 800));
+        getDriver().manage().window().setPosition(new Point(550, 300));
+        homePage.open();
+
+        int height=getDriver().manage().window().getSize().height;
+        int width=getDriver().manage().window().getSize().width;
+
+        Assert.assertTrue(height==800&&width==1280,
+                "ERROR:the browser doesn't have the correct size: " + getDriver().manage().window().getSize());
+    }
+
+    @Test(testName = "Verify dynamic result search", description = "verifies the total amount of results in a search, increases as the user scrolls down")
+    public void verifyDynamicScrollLoadsMoreResults() {
+        WebDriver driver = getDriver();
+        driver.get("https://www.coursera.org/search?query=python");
+
+        SearchPage resultsPage = new SearchPage(driver);
+
+        SoftAssert sa = new SoftAssert();
+
+        int previousCount = resultsPage.getResultsCount();
+        sa.assertTrue(previousCount > 0, "ERROR: Initial results should not be zero");
+
+        for (int i = 1; i <= 3; i++) {
+//            LOGGER.info("count:"+previousCount);
+            resultsPage.scrollToResult(previousCount-1);
+            int newCount = resultsPage.getResultsCount();
+
+            sa.assertTrue(
+                    newCount > previousCount,
+                    "ERROR: Scroll #" + i + " should load more results. Before: "
+                            + previousCount + " After: " + newCount
+            );
+            previousCount = newCount;
+        }
+        sa.assertAll();
+    }
+
+    @Test(testName = "Verify links in carousel", description = "verifies that each button on the partners carousel, redirects to a link of that partner")
+    public void verifyLinksOfPartnersCarousel() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+
+        List<ExtendedWebElement> partners=homePage.getPartnersCarousel();
+
+        SoftAssert sa = new SoftAssert();
+        partners.stream().forEach(p->{
+            String href= homePage.getHref(p).toLowerCase();
+            String text=homePage.getTrimText(p).toLowerCase();
+            sa.assertTrue(href.contains(text),"ERROR: Carousel button doesn't refer to corresponding partner. href:"+href+". text:"+text);
+        });
+
+        sa.assertAll();
+    }
 }
 

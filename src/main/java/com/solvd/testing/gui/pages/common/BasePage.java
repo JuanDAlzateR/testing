@@ -31,4 +31,5 @@ public abstract class BasePage extends AbstractPage {
     protected void pause(int seconds) {
         CommonUtils.pause(seconds);
     }
+
 }

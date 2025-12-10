@@ -30,4 +30,8 @@ public abstract class BaseComponent extends AbstractUIObject {
         actions.click(element);
         pause(1);
     }
+
+    protected void pause(int seconds) {
+        CommonUtils.pause(seconds);
+    }
 }

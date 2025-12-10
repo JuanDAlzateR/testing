@@ -14,17 +14,35 @@ import org.openqa.selenium.support.FindBy;
 
 
 import java.time.Duration;
+import java.util.List;
 
 public class HomePage extends BasePage {
     public static final Logger LOGGER = LogManager.getLogger(HomePage.class);
+
+    @FindBy(xpath = "//a[@href='/google-career-certificates']/ancestor::div[@data-testid='overflow-carousel-content']//a")
+    private List<ExtendedWebElement> partnersCarousel;
 
     public HomePage(WebDriver driver) {
         super(driver);
     }
 
-    public void example() {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
-//        new WebDriverWait(driver,Duration.ofSeconds(2);
+
+    public String getHref(ExtendedWebElement element) {
+        return element.getAttribute("href");
     }
+
+    public String getTrimText(ExtendedWebElement element) {
+
+        String text = element.getText().replaceAll("\\b(University|of)\\b", "").trim();
+        if (text.toLowerCase().contains("deeplearning.ai")) {
+            return "deep-learning-ai";
+        }
+        return text;
+    }
+
+    public List<ExtendedWebElement> getPartnersCarousel() {
+        return partnersCarousel;
+    }
+
 
 }
