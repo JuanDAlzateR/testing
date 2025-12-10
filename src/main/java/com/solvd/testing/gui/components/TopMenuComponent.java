@@ -29,6 +29,12 @@ public class TopMenuComponent extends AbstractUIObject {
     @FindBy(css = "button[data-testid='megamenu-explore-button']")
     private ExtendedWebElement exploreButton;
 
+    @FindBy(xpath = "//span[text()='Log In']")
+    private ExtendedWebElement logInButton;
+
+    @FindBy(xpath = "//span[contains(text(),\" Universities\")]")
+    private ExtendedWebElement universitiesButton;
+
     public void useSearchBar(String string) {
         searchBar.click();
         searchBar.type(string);
@@ -82,6 +88,16 @@ public class TopMenuComponent extends AbstractUIObject {
 
         csLink.click();
         CommonUtils.pause(3);
+    }
+
+    public void clickLogIn(){
+        logInButton.click();
+        CommonUtils.pause(1);
+    }
+
+    public void clickUniversities(){
+        universitiesButton.click();
+        CommonUtils.pause(1);
     }
 
 

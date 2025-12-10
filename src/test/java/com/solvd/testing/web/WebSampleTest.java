@@ -1,5 +1,6 @@
 package com.solvd.testing.web;
 
+import com.solvd.testing.gui.components.LogInComponent;
 import com.solvd.testing.gui.components.TopMenuComponent;
 import com.solvd.testing.gui.pages.desktop.CoursePage;
 import com.solvd.testing.gui.pages.desktop.HomePage;
@@ -124,7 +125,31 @@ public class WebSampleTest implements IAbstractTest {
         sa.assertAll();
     }
 
+    @Test
+    public void logIn(){
+        HomePage homePage =new HomePage(getDriver());
+        TopMenuComponent topMenuComponent= new TopMenuComponent(getDriver());
+        LogInComponent loginComponent=new LogInComponent(getDriver());
+        homePage.open();
+        topMenuComponent.clickLogIn();
 
+        loginComponent.inputEmail("example@email.com");
+        CommonUtils.pause(1);
+        loginComponent.clickContinue();
+        CommonUtils.pause(1);
+        loginComponent.inputPassword("1234");
+        CommonUtils.pause(1);
+        loginComponent.clickNext();
+        CommonUtils.pause(1);
+
+        SoftAssert sa=new SoftAssert();
+        sa.assertEquals(loginComponent.getEmailValue(),"example@email.com",
+                "ERROR: the email wasn't input correctly");
+        sa.assertEquals(loginComponent.getPasswordValue(),"1234",
+                "ERROR: the password wasn't input correctly");
+        sa.assertTrue(loginComponent.visibleWarning(),"ERROR: Page doesn't show incorrect email or password");
+        sa.assertAll();
+    }
 
 
 
