@@ -1,5 +1,6 @@
 package com.solvd.testing.gui.pages.desktop;
 
+import com.solvd.testing.gui.pages.common.BasePage;
 import com.zebrunner.carina.utils.common.CommonUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
@@ -10,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class CoursePage extends AbstractPage {
+public class CoursePage extends BasePage {
     public static final Logger LOGGER = LogManager.getLogger(CoursePage.class);
 
     public CoursePage(WebDriver driver) {
@@ -30,29 +31,25 @@ public class CoursePage extends AbstractPage {
     private ExtendedWebElement enrollButton;
 
 
-    public String getCourseTitle(){
+    public String getCourseTitle() {
         return title.getText();
     }
 
-    public String getCourseInstructor(){
+    public String getCourseInstructor() {
         return instructor.getText();
     }
 
-    public String getRating(){
+    public String getRating() {
         return rating.getText();
     }
 
-    public Boolean enrollButtonPresent(){
+    public Boolean enrollButtonPresent() {
         return enrollButton.isPresent();
     }
 
-    public Boolean enrollButtonIsEnabled(){
-        return enrollButton.isPresent()&&enrollButton.isEnabled();
+    public Boolean enrollButtonIsEnabled() {
+        return enrollButton.isPresent() && enrollButton.isEnabled();
     }
-
-
-
-
 
 
 }

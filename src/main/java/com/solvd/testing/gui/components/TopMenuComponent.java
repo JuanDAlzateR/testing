@@ -17,8 +17,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class TopMenuComponent extends AbstractUIObject {
+public class TopMenuComponent extends BaseComponent {
     public static final Logger LOGGER = LogManager.getLogger(TopMenuComponent.class);
+
     public TopMenuComponent(WebDriver driver) {
         super(driver);
     }
@@ -29,8 +30,14 @@ public class TopMenuComponent extends AbstractUIObject {
     @FindBy(css = "button[data-testid='megamenu-explore-button']")
     private ExtendedWebElement exploreButton;
 
+    @FindBy(xpath = "//span[text()='Log In']")
+    private ExtendedWebElement logInButton;
+
+    @FindBy(xpath = "//span[contains(text(),\" Universities\")]")
+    private ExtendedWebElement universitiesButton;
+
     public void useSearchBar(String string) {
-        searchBar.click();
+        click(searchBar);
         searchBar.type(string);
         searchBar.sendKeys(Keys.ENTER);
         //searchBar.type(string + Keys.ENTER);
@@ -39,17 +46,8 @@ public class TopMenuComponent extends AbstractUIObject {
 
     }
 
-    public void clickExploreButton() {
-        exploreButton.click();
-        CommonUtils.pause(3); // wait 3 seconds
-
-    }
-    public void clickExplore() {
-        exploreButton.click();
-    }
-
     public void hoverExplore() {
-        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         WebElement explore = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(
@@ -74,14 +72,24 @@ public class TopMenuComponent extends AbstractUIObject {
     }
 
     public void clickCSLink() {
-        exploreButton.click();
-        CommonUtils.pause(2);
-        WebElement csLink=driver.findElement(By
-                .xpath("//div[contains(@data-testid,'megamenu-item')]/a[contains(@href,'computer-science')]")
-        );
+        clickAndWait(exploreButton);
 
-        csLink.click();
-        CommonUtils.pause(3);
+        ExtendedWebElement csLink = elementFactory
+                .findByXpath("//div[contains(@data-testid,'megamenu-item')]/a[contains(@href,'computer-science')]", "csLink");
+
+        clickAndWait(csLink);
+    }
+
+    public void clickExploreButton() {
+        clickAndWait(exploreButton);
+    }
+
+    public void clickLogIn() {
+        clickAndWait(logInButton);
+    }
+
+    public void clickUniversities() {
+        clickAndWait(universitiesButton);
     }
 
 
