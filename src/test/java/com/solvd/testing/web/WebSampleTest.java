@@ -1,6 +1,7 @@
 package com.solvd.testing.web;
 
 import com.solvd.testing.gui.components.TopMenuComponent;
+import com.solvd.testing.gui.pages.desktop.CoursePage;
 import com.solvd.testing.gui.pages.desktop.HomePage;
 
 import com.solvd.testing.gui.pages.desktop.SearchPage;
@@ -78,7 +79,7 @@ public class WebSampleTest implements IAbstractTest {
         sa.assertTrue(currentUrl.contains("search?query=Java"),
                 "ERROR: the search for java doesn't show in the URL: " + currentUrl);
         sa.assertTrue(currentUrl.contains("productDifficultyLevel=Advanced"),
-                "ERROR:the search doesn't filter by advance level: " + currentUrl);
+                "ERROR:the search doesn't filter by advance level. URL: " + currentUrl);
         sa.assertAll();
     }
 
@@ -87,14 +88,39 @@ public class WebSampleTest implements IAbstractTest {
         HomePage homePage =new HomePage(getDriver());
         TopMenuComponent topMenuComponent= new TopMenuComponent(getDriver());
         SearchPage searchPage=new SearchPage(getDriver());
+
+
         homePage.open();
         topMenuComponent.useSearchBar("Programming");
-        searchPage.clickOnResult(0);
 
+        String mainTab = getDriver().getWindowHandle();
+
+        searchPage.clickOnResult(0);
         CommonUtils.pause(1);
 
+        for (String handle : getDriver().getWindowHandles()) {
+            if (!handle.equals(mainTab)) {
+                getDriver().switchTo().window(handle);
+                break;
+            }
+        }
+
+        CoursePage coursePage=new CoursePage(getDriver());
+
+        String title=coursePage.getCourseTitle();
+        String instructor=coursePage.getCourseInstructor();
+        String rating=coursePage.getRating();
+
         SoftAssert sa=new SoftAssert();
-        sa.assertEquals();
+        sa.assertTrue(title.toLowerCase().contains("programming"),
+                "ERROR: the course title doesn't contains 'programming'. Title: " + title);
+        sa.assertNotNull(instructor,
+                "ERROR: course doesn't show an instructor. Instructor: " + instructor);
+        sa.assertNotNull(rating,
+                "ERROR: course doesn't show a rating. Rating: " + instructor);
+
+        sa.assertTrue(coursePage.enrollButtonIsEnabled(),
+                "ERROR: course doesn't have an enabled enroll button.");
         sa.assertAll();
     }
 

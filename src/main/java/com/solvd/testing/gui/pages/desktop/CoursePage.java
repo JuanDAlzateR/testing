@@ -20,36 +20,39 @@ public class CoursePage extends AbstractPage {
     @FindBy(xpath = "//h1[@data-e2e=\"hero-title\"]")
     private ExtendedWebElement title;
 
-    @FindBy(xpath = "//span[text()=\"Instructor: \"]")
+    @FindBy(xpath = "//span[text()=\"Instructor: \"]/a/span")
     private ExtendedWebElement instructor;
 
+    @FindBy(xpath = "//div[contains(@aria-label,'stars')]")
+    private ExtendedWebElement rating;
 
-    public void choseLevel(){
-        levelButton.click();
-        CommonUtils.pause(2);
-        WebElement advancedCheckBox=driver.findElement(By
-                .xpath("//div[contains(@data-testid,'productDifficultyLevel:Advanced')]")
-        );
-        advancedCheckBox.click();
-        CommonUtils.pause(2);
-        WebElement viewButton=driver.findElement(By
-                .xpath("//span[@class='cds-button-label' and text()='View']")
-        );
-        viewButton.click();
+    @FindBy(css = "span[data-test='enroll-button-label']")
+    private ExtendedWebElement enrollButton;
 
+
+    public String getCourseTitle(){
+        return title.getText();
     }
 
-    public void clickOnResult(int n){
-        ExtendedWebElement result=resultNumber(n);
-        result.click();
+    public String getCourseInstructor(){
+        return instructor.getText();
     }
 
-    public ExtendedWebElement resultNumber(int n){
-        WebElement result=driver.findElement(By
-                        .xpath("//a[contains(@data-click-value,'hitPosition\":"+n+"')]")
-        );
-        return (ExtendedWebElement) result;
-
+    public String getRating(){
+        return rating.getText();
     }
+
+    public Boolean enrollButtonPresent(){
+        return enrollButton.isPresent();
+    }
+
+    public Boolean enrollButtonIsEnabled(){
+        return enrollButton.isPresent()&&enrollButton.isEnabled();
+    }
+
+
+
+
+
 
 }

@@ -39,15 +39,16 @@ public class SearchPage extends AbstractPage {
     }
 
     public void clickOnResult(int n){
-        ExtendedWebElement result=resultNumber(n);
+        WebElement result=resultNumber(n);
         result.click();
     }
 
-    public ExtendedWebElement resultNumber(int n){
+    public WebElement resultNumber(int n){
         WebElement result=driver.findElement(By
                         .xpath("//a[contains(@data-click-value,'hitPosition\":"+n+"')]")
         );
-        return (ExtendedWebElement) result;
+        LOGGER.info("//a[contains(@data-click-value,'hitPosition\":"+n+"')]");
+        return result;
 
     }
 
