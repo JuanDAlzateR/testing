@@ -1,5 +1,6 @@
 package com.solvd.testing.gui.pages.desktop;
 
+import com.solvd.testing.gui.pages.common.BasePage;
 import com.zebrunner.carina.utils.common.CommonUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
@@ -14,7 +15,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.time.Duration;
 
-public class HomePage extends AbstractPage {
+public class HomePage extends BasePage {
     public static final Logger LOGGER = LogManager.getLogger(HomePage.class);
 
     public HomePage(WebDriver driver) {

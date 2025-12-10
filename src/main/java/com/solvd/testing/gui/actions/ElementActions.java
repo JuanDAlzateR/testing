@@ -12,37 +12,40 @@ import java.time.Duration;
 public class ElementActions {
 
     private WebDriver driver;
+    private WebDriverWait wait;
 
     public ElementActions(WebDriver driver) {
         this.driver = driver;
+        this.wait=new WebDriverWait(driver, Duration.ofSeconds(10));
 
     }
 
     public void click(ExtendedWebElement element) {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(element));
+      wait.until(ExpectedConditions.elementToBeClickable(element));
+        element.click();
+    }
+
+    public void click(WebElement element) {
+       wait.until(ExpectedConditions.elementToBeClickable(element));
         element.click();
     }
 
     public String getText(ExtendedWebElement element) {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.visibilityOf(element));
+       wait.until(ExpectedConditions.visibilityOf(element));
         return element.getText();
     }
 
     public void type(ExtendedWebElement element, String text) {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.visibilityOf(element));
+        wait.until(ExpectedConditions.visibilityOf(element));
         element.clear();
         element.type(text);
     }
 
     public void waitVisible(ExtendedWebElement element) {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.visibilityOf(element));
+        wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public void wait(int seconds) {
+    public void pause(int seconds) {
         CommonUtils.pause(seconds);
     }
 }

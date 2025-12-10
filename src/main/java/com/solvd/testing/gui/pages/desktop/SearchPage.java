@@ -1,5 +1,6 @@
 package com.solvd.testing.gui.pages.desktop;
 
+import com.solvd.testing.gui.pages.common.BasePage;
 import com.zebrunner.carina.utils.common.CommonUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
@@ -13,7 +14,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.time.Duration;
 
-public class SearchPage extends AbstractPage {
+public class SearchPage extends BasePage {
     public static final Logger LOGGER = LogManager.getLogger(SearchPage.class);
 
     public SearchPage(WebDriver driver) {
@@ -24,32 +25,23 @@ public class SearchPage extends AbstractPage {
     private ExtendedWebElement levelButton;
 
     public void choseLevel(){
-        levelButton.click();
-        CommonUtils.pause(2);
-        WebElement advancedCheckBox=driver.findElement(By
-                .xpath("//div[contains(@data-testid,'productDifficultyLevel:Advanced')]")
-        );
-        advancedCheckBox.click();
-        CommonUtils.pause(2);
-        WebElement viewButton=driver.findElement(By
-                .xpath("//span[@class='cds-button-label' and text()='View']")
-        );
-        viewButton.click();
+        click(levelButton);
+        LOGGER.info("click on level button");
+        ExtendedWebElement advancedCheckBox= elementFactory
+                .findByXpath("//div[contains(@data-testid,'productDifficultyLevel:Advanced')]","advancedCheckBox");
+        click(advancedCheckBox);
+        LOGGER.info("click on advance button");
+        ExtendedWebElement viewButton= elementFactory
+                .findByXpath("//span[@class='cds-button-label' and text()='View']","viewButton");
 
+        click(viewButton);
+        LOGGER.info("click on view button");
     }
 
     public void clickOnResult(int n){
-        WebElement result=resultNumber(n);
-        result.click();
-    }
-
-    public WebElement resultNumber(int n){
-        WebElement result=driver.findElement(By
-                        .xpath("//a[contains(@data-click-value,'hitPosition\":"+n+"')]")
-        );
-        LOGGER.info("//a[contains(@data-click-value,'hitPosition\":"+n+"')]");
-        return result;
-
+        ExtendedWebElement result= elementFactory
+                .findByXpath("//a[contains(@data-click-value,'hitPosition\":"+n+"')]","result"+n);
+        click(result);
     }
 
 }

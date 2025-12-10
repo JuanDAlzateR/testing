@@ -1,5 +1,6 @@
 package com.solvd.testing.gui.components;
 
+import com.solvd.testing.gui.actions.ElementActions;
 import com.zebrunner.carina.utils.common.CommonUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
@@ -11,16 +12,16 @@ import java.time.Duration;
 
 public abstract class BaseComponent extends AbstractUIObject {
 
-    public BasePage(WebDriver driver) {
+    protected ElementActions actions;
+
+    public BaseComponent(WebDriver driver) {
         super(driver);
+        this.actions =new ElementActions(driver);
     }
 
     protected void click(ExtendedWebElement element) {
-        element.click();
-        pause(1);
+        actions.click(element);
+        actions.pause(1);
     }
 
-    protected void pause(int seconds) {
-        CommonUtils.pause(seconds);
-    }
 }
