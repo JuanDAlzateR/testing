@@ -31,29 +31,25 @@ public class CoursePage extends BasePage {
     private ExtendedWebElement enrollButton;
 
 
-    public String getCourseTitle(){
+    public String getCourseTitle() {
         return title.getText();
     }
 
-    public String getCourseInstructor(){
+    public String getCourseInstructor() {
         return instructor.getText();
     }
 
-    public String getRating(){
+    public String getRating() {
         return rating.getText();
     }
 
-    public Boolean enrollButtonPresent(){
+    public Boolean enrollButtonPresent() {
         return enrollButton.isPresent();
     }
 
-    public Boolean enrollButtonIsEnabled(){
-        return enrollButton.isPresent()&&enrollButton.isEnabled();
+    public Boolean enrollButtonIsEnabled() {
+        return enrollButton.isPresent() && enrollButton.isEnabled();
     }
-
-
-
-
 
 
 }

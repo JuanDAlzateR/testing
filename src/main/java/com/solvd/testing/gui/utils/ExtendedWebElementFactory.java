@@ -9,12 +9,12 @@ import org.openqa.selenium.WebElement;
 public class ExtendedWebElementFactory {
     WebDriver driver;
 
-    public ExtendedWebElementFactory(WebDriver driver){
-        this.driver=driver;
+    public ExtendedWebElementFactory(WebDriver driver) {
+        this.driver = driver;
     }
 
-    public ExtendedWebElement findByXpath(String xpathExpression, String name){
-        return new ExtendedWebElement(By.xpath(xpathExpression),name,driver,driver);
+    public ExtendedWebElement findByXpath(String xpathExpression, String name) {
+        return new ExtendedWebElement(By.xpath(xpathExpression), name, driver, driver);
         //For now SearchContext it's driver. It could be implemented in a better way.
     }
 

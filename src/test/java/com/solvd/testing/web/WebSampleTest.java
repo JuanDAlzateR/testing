@@ -18,23 +18,22 @@ import org.testng.asserts.SoftAssert;
 import java.time.Duration;
 
 
-
 public class WebSampleTest implements IAbstractTest {
 
     @Test
-    public void verifyHomePage(){
-        HomePage homePage =new HomePage(getDriver());
+    public void verifyHomePage() {
+        HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
     }
 
     @Test
-    public void verifySearchBar(){
-        HomePage homePage =new HomePage(getDriver());
+    public void verifySearchBar() {
+        HomePage homePage = new HomePage(getDriver());
 //        getDriver().manage().window().setSize(new Dimension(1280, 800));
 //        getDriver().manage().window().setPosition(new Point(550, 300));
         homePage.open();
-        TopMenuComponent topMenuComponent= new TopMenuComponent(getDriver());
+        TopMenuComponent topMenuComponent = new TopMenuComponent(getDriver());
         topMenuComponent.useSearchBar("Java Programming");
 
         // Wait to load the page
@@ -43,18 +42,16 @@ public class WebSampleTest implements IAbstractTest {
 
         String currentUrl = getDriver().getCurrentUrl();
 
-
         Assert.assertTrue(currentUrl.contains("search?query=Java+Programming")
                         || currentUrl.contains("search?query=Java%20Programming"),
                 "ERROR:the search doesn't show in the URL: " + currentUrl);
     }
 
 
-
     @Test
-    public void verifyExplore(){
-        HomePage homePage =new HomePage(getDriver());
-        TopMenuComponent topMenuComponent= new TopMenuComponent(getDriver());
+    public void verifyExplore() {
+        HomePage homePage = new HomePage(getDriver());
+        TopMenuComponent topMenuComponent = new TopMenuComponent(getDriver());
         homePage.open();
         topMenuComponent.clickCSLink();
 
@@ -65,10 +62,10 @@ public class WebSampleTest implements IAbstractTest {
     }
 
     @Test
-    public void filterSearch(){
-        HomePage homePage =new HomePage(getDriver());
-        TopMenuComponent topMenuComponent= new TopMenuComponent(getDriver());
-        SearchPage searchPage=new SearchPage(getDriver());
+    public void filterSearch() {
+        HomePage homePage = new HomePage(getDriver());
+        TopMenuComponent topMenuComponent = new TopMenuComponent(getDriver());
+        SearchPage searchPage = new SearchPage(getDriver());
         homePage.open();
         topMenuComponent.useSearchBar("Java");
         searchPage.choseLevel();
@@ -76,7 +73,7 @@ public class WebSampleTest implements IAbstractTest {
 
         String currentUrl = getDriver().getCurrentUrl();
 
-        SoftAssert sa=new SoftAssert();
+        SoftAssert sa = new SoftAssert();
         sa.assertTrue(currentUrl.contains("search?query=Java"),
                 "ERROR: the search for java doesn't show in the URL: " + currentUrl);
         sa.assertTrue(currentUrl.contains("productDifficultyLevel=Advanced"),
@@ -85,11 +82,10 @@ public class WebSampleTest implements IAbstractTest {
     }
 
     @Test
-    public void searchCourse(){
-        HomePage homePage =new HomePage(getDriver());
-        TopMenuComponent topMenuComponent= new TopMenuComponent(getDriver());
-        SearchPage searchPage=new SearchPage(getDriver());
-
+    public void searchCourse() {
+        HomePage homePage = new HomePage(getDriver());
+        TopMenuComponent topMenuComponent = new TopMenuComponent(getDriver());
+        SearchPage searchPage = new SearchPage(getDriver());
 
         homePage.open();
         topMenuComponent.useSearchBar("Programming");
@@ -106,13 +102,13 @@ public class WebSampleTest implements IAbstractTest {
             }
         }
 
-        CoursePage coursePage=new CoursePage(getDriver());
+        CoursePage coursePage = new CoursePage(getDriver());
 
-        String title=coursePage.getCourseTitle();
-        String instructor=coursePage.getCourseInstructor();
-        String rating=coursePage.getRating();
+        String title = coursePage.getCourseTitle();
+        String instructor = coursePage.getCourseInstructor();
+        String rating = coursePage.getRating();
 
-        SoftAssert sa=new SoftAssert();
+        SoftAssert sa = new SoftAssert();
         sa.assertTrue(title.toLowerCase().contains("programming"),
                 "ERROR: the course title doesn't contains 'programming'. Title: " + title);
         sa.assertNotNull(instructor,
@@ -126,10 +122,10 @@ public class WebSampleTest implements IAbstractTest {
     }
 
     @Test
-    public void logIn(){
-        HomePage homePage =new HomePage(getDriver());
-        TopMenuComponent topMenuComponent= new TopMenuComponent(getDriver());
-        LogInComponent loginComponent=new LogInComponent(getDriver());
+    public void logIn() {
+        HomePage homePage = new HomePage(getDriver());
+        TopMenuComponent topMenuComponent = new TopMenuComponent(getDriver());
+        LogInComponent loginComponent = new LogInComponent(getDriver());
         homePage.open();
         topMenuComponent.clickLogIn();
 
@@ -142,15 +138,14 @@ public class WebSampleTest implements IAbstractTest {
         loginComponent.clickNext();
         CommonUtils.pause(1);
 
-        SoftAssert sa=new SoftAssert();
-        sa.assertEquals(loginComponent.getEmailValue(),"example@email.com",
+        SoftAssert sa = new SoftAssert();
+        sa.assertEquals(loginComponent.getEmailValue(), "example@email.com",
                 "ERROR: the email wasn't input correctly");
-        sa.assertEquals(loginComponent.getPasswordValue(),"1234",
+        sa.assertEquals(loginComponent.getPasswordValue(), "1234",
                 "ERROR: the password wasn't input correctly");
-        sa.assertTrue(loginComponent.visibleWarning(),"ERROR: Page doesn't show incorrect email or password");
+        sa.assertTrue(loginComponent.visibleWarning(), "ERROR: Page doesn't show incorrect email or password");
         sa.assertAll();
     }
-
 
 
 }

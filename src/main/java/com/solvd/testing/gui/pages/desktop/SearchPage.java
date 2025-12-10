@@ -24,23 +24,23 @@ public class SearchPage extends BasePage {
     @FindBy(xpath = "//button[@data-testid='chip-button-inactive']/div[text()='Level']")
     private ExtendedWebElement levelButton;
 
-    public void choseLevel(){
+    public void choseLevel() {
         click(levelButton);
-        LOGGER.info("click on level button");
-        ExtendedWebElement advancedCheckBox= elementFactory
-                .findByXpath("//div[contains(@data-testid,'productDifficultyLevel:Advanced')]","advancedCheckBox");
+
+        ExtendedWebElement advancedCheckBox = elementFactory
+                .findByXpath("//div[contains(@data-testid,'productDifficultyLevel:Advanced')]", "advancedCheckBox");
         click(advancedCheckBox);
-        LOGGER.info("click on advance button");
-        ExtendedWebElement viewButton= elementFactory
-                .findByXpath("//span[@class='cds-button-label' and text()='View']","viewButton");
+
+        ExtendedWebElement viewButton = elementFactory
+                .findByXpath("//span[@class='cds-button-label' and text()='View']", "viewButton");
 
         click(viewButton);
-        LOGGER.info("click on view button");
+
     }
 
-    public void clickOnResult(int n){
-        ExtendedWebElement result= elementFactory
-                .findByXpath("//a[contains(@data-click-value,'hitPosition\":"+n+"')]","result"+n);
+    public void clickOnResult(int n) {
+        ExtendedWebElement result = elementFactory
+                .findByXpath("//a[contains(@data-click-value,'hitPosition\":" + n + "')]", "result" + n);
         click(result);
     }
 

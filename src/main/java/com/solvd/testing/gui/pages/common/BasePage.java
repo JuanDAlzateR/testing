@@ -15,16 +15,15 @@ public abstract class BasePage extends AbstractPage {
 
     public BasePage(WebDriver driver) {
         super(driver);
-        this.actions =new ElementActions(driver);
-        this.elementFactory=new ExtendedWebElementFactory(driver);
+        this.actions = new ElementActions(driver);
+        this.elementFactory = new ExtendedWebElementFactory(driver);
     }
 
     protected void click(ExtendedWebElement element) {
         actions.click(element);
-        pause(1);
     }
 
-    protected void click(WebElement element) {
+    protected void clickAndWait(ExtendedWebElement element) {
         actions.click(element);
         pause(1);
     }

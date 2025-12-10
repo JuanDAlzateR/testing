@@ -16,22 +16,17 @@ public class ElementActions {
 
     public ElementActions(WebDriver driver) {
         this.driver = driver;
-        this.wait=new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
     }
 
     public void click(ExtendedWebElement element) {
-      wait.until(ExpectedConditions.elementToBeClickable(element));
-        element.click();
-    }
-
-    public void click(WebElement element) {
-       wait.until(ExpectedConditions.elementToBeClickable(element));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
         element.click();
     }
 
     public String getText(ExtendedWebElement element) {
-       wait.until(ExpectedConditions.visibilityOf(element));
+        wait.until(ExpectedConditions.visibilityOf(element));
         return element.getText();
     }
 
