@@ -21,41 +21,9 @@ public class HomePage extends AbstractPage {
         super(driver);
     }
 
-    @FindBy(id = "search-autocomplete-input")
-    private ExtendedWebElement searchBar;
-
-
-    @FindBy(xpath = "//button[@data-testid='chip-button-inactive']/div[text()='Level']")
-    private ExtendedWebElement levelButton;
-
-
-    public void useSearchBar(String string) {
-        searchBar.click();
-        searchBar.type(string);
-        searchBar.sendKeys(Keys.ENTER);
-        //searchBar.type(string + Keys.ENTER);
-
-        CommonUtils.pause(3); // wait 3 seconds
-
-    }
-
     public void example() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
 //        new WebDriverWait(driver,Duration.ofSeconds(2);
     }
 
-    public void clickLevel(){
-        levelButton.click();
-        CommonUtils.pause(2);
-        WebElement advancedCheckBox=driver.findElement(By
-                .xpath("//div[contains(@data-testid,'productDifficultyLevel:Advanced')]")
-        );
-        advancedCheckBox.click();
-        CommonUtils.pause(2);
-        WebElement viewButton=driver.findElement(By
-                .xpath("//span[@class='cds-button-label' and text()='View']")
-        );
-        viewButton.click();
-
-    }
 }
