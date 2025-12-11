@@ -6,7 +6,6 @@ import com.zebrunner.carina.utils.common.CommonUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 
 public abstract class BasePage extends AbstractPage {
