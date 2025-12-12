@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 public class FooterComponent extends BaseComponent implements IMobileUtils {
 
     public FooterComponent(WebDriver driver, SearchContext searchContext) {
-        super(driver,searchContext);
+        super(driver, searchContext);
     }
 
     @FindBy(id = "//android.widget.Button[@content-desc='Home']")

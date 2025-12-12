@@ -23,6 +23,10 @@ public class TopComponent extends BaseComponent {
     @FindBy(xpath = "//android.widget.ImageView[@content-desc='Settings']")
     private ExtendedWebElement settingsBtn;
 
+    @FindBy(xpath = "//android.widget.ImageView[@content-desc=\"More options\"]")
+    private ExtendedWebElement moreOptionsBtn;
+
+
     public void clickCast() {
         castBtn.click();
     }

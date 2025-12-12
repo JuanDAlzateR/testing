@@ -2,6 +2,7 @@ package com.solvd.testing.mobile.gui.pages.android;
 
 import com.solvd.testing.mobile.gui.components.TopComponent;
 import com.solvd.testing.mobile.gui.pages.common.HomePageBase;
+import com.solvd.testing.mobile.gui.pages.common.SearchResultsPageBase;
 import com.zebrunner.carina.utils.common.CommonUtils;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.utils.factory.DeviceType.Type;
@@ -15,7 +16,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import java.time.Duration;
-
 
 
 @DeviceType(pageType = Type.ANDROID_PHONE, parentClass = HomePageBase.class)
@@ -42,13 +42,13 @@ public class HomePage extends HomePageBase {
 
     @Override
     public void denyNotifications() {
-        if (denyNotificationsBtn.isVisible(Duration.ofSeconds(1))){
+        if (denyNotificationsBtn.isVisible(Duration.ofSeconds(1))) {
             denyNotificationsBtn.click();
         }
     }
 
     @Override
-    public void search(String string) {
+    public SearchResultsPageBase search(String string) {
 //        searchBtn.click();
         topComponent.clickSearch();
         CommonUtils.pause(1);
@@ -58,6 +58,7 @@ public class HomePage extends HomePageBase {
         Actions action = new Actions(driver);
         action.sendKeys(Keys.ENTER).perform();
         CommonUtils.pause(5);
+        return initPage(driver,SearchResultsPageBase.class);
     }
 
 }
