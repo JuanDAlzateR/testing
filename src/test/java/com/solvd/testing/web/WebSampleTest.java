@@ -164,7 +164,7 @@ public class WebSampleTest implements IAbstractTest {
         homePage.open();
         topMenuComponent.clickUniversities();
         LOGGER.info("start:");
-        Boolean bool=universitiesPage.linkedInButtonVisible();
+        Boolean bool = universitiesPage.linkedInButtonVisible();
         LOGGER.info("finish:");
         String currentUrl = getDriver().getCurrentUrl();
         SoftAssert sa = new SoftAssert();
@@ -185,10 +185,10 @@ public class WebSampleTest implements IAbstractTest {
         getDriver().manage().window().setPosition(new Point(550, 300));
         homePage.open();
 
-        int height=getDriver().manage().window().getSize().height;
-        int width=getDriver().manage().window().getSize().width;
+        int height = getDriver().manage().window().getSize().height;
+        int width = getDriver().manage().window().getSize().width;
 
-        Assert.assertTrue(height==800&&width==1280,
+        Assert.assertTrue(height == 800 && width == 1280,
                 "ERROR:the browser doesn't have the correct size: " + getDriver().manage().window().getSize());
     }
 
@@ -206,7 +206,7 @@ public class WebSampleTest implements IAbstractTest {
 
         for (int i = 1; i <= 3; i++) {
 //            LOGGER.info("count:"+previousCount);
-            resultsPage.scrollToResult(previousCount-1);
+            resultsPage.scrollToResult(previousCount - 1);
             int newCount = resultsPage.getResultsCount();
 
             sa.assertTrue(
@@ -224,13 +224,13 @@ public class WebSampleTest implements IAbstractTest {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
 
-        List<ExtendedWebElement> partners=homePage.getPartnersCarousel();
+        List<ExtendedWebElement> partners = homePage.getPartnersCarousel();
 
         SoftAssert sa = new SoftAssert();
-        partners.stream().forEach(p->{
-            String href= homePage.getHref(p).toLowerCase();
-            String text=homePage.getTrimText(p).toLowerCase();
-            sa.assertTrue(href.contains(text),"ERROR: Carousel button doesn't refer to corresponding partner. href:"+href+". text:"+text);
+        partners.stream().forEach(p -> {
+            String href = homePage.getHref(p).toLowerCase();
+            String text = homePage.getTrimText(p).toLowerCase();
+            sa.assertTrue(href.contains(text), "ERROR: Carousel button doesn't refer to corresponding partner. href:" + href + ". text:" + text);
         });
 
         sa.assertAll();

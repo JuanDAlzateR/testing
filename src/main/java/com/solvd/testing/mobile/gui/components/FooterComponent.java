@@ -1,0 +1,44 @@
+package com.solvd.testing.mobile.gui.components;
+
+import com.zebrunner.carina.utils.mobile.IMobileUtils;
+import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
+import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.FindBy;
+
+public class FooterComponent extends BaseComponent implements IMobileUtils {
+
+    public FooterComponent(WebDriver driver, SearchContext searchContext) {
+        super(driver, searchContext);
+    }
+
+    @FindBy(id = "//android.widget.Button[@content-desc='Home']")
+    private ExtendedWebElement homeBtn;
+
+    @FindBy(id = "//android.widget.Button[@content-desc='Shorts']")
+    private ExtendedWebElement shortsBtn;
+
+    @FindBy(id = "//android.widget.Button[@content-desc='Subscriptions']")
+    private ExtendedWebElement subscriptionsBtn;
+
+    @FindBy(id = "//android.widget.Button[@content-desc='You']")
+    private ExtendedWebElement youBtn;
+
+    public void clickHome() {
+        homeBtn.click();
+    }
+
+    public void clickShorts() {
+        shortsBtn.click();
+    }
+
+    public void clickSubscriptions() {
+        subscriptionsBtn.click();
+    }
+
+    public void clickYou() {
+        youBtn.click();
+    }
+
+}

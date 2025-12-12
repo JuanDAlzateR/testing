@@ -1,0 +1,46 @@
+package com.solvd.testing.mobile.gui.components;
+
+import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.FindBy;
+
+public class TopComponent extends BaseComponent {
+
+    public TopComponent(WebDriver driver, SearchContext searchContext) {
+        super(driver, searchContext);
+    }
+
+    @FindBy(xpath = "//android.widget.Button[@content-desc='Cast. Disconnected']")
+    private ExtendedWebElement castBtn;
+
+    @FindBy(xpath = "//android.widget.ImageView[@content-desc='Notifications']")
+    private ExtendedWebElement notificationsBtn;
+
+    @FindBy(xpath = "//android.widget.ImageView[@content-desc='Search']")
+    private ExtendedWebElement searchBtn;
+
+    @FindBy(xpath = "//android.widget.ImageView[@content-desc='Settings']")
+    private ExtendedWebElement settingsBtn;
+
+    @FindBy(xpath = "//android.widget.ImageView[@content-desc=\"More options\"]")
+    private ExtendedWebElement moreOptionsBtn;
+
+
+    public void clickCast() {
+        castBtn.click();
+    }
+
+    public void clickNotifications() {
+        notificationsBtn.click();
+    }
+
+    public void clickSearch() {
+        searchBtn.click();
+    }
+
+    public void clickSettings() {
+        settingsBtn.click();
+    }
+
+}
