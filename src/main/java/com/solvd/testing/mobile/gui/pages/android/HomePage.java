@@ -58,7 +58,7 @@ public class HomePage extends HomePageBase {
         Actions action = new Actions(driver);
         action.sendKeys(Keys.ENTER).perform();
         CommonUtils.pause(5);
-        return initPage(driver,SearchResultsPageBase.class);
+        return initPage(driver, SearchResultsPageBase.class);
     }
 
 }

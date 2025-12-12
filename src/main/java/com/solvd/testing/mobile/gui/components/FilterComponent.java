@@ -27,33 +27,33 @@ public class FilterComponent extends BaseComponent {
 
     public ExtendedWebElement findFilterButton(String string) {
         String xpathString = "//android.support.v7.widget.RecyclerView[@content-desc='filters']//android.widget.TextView[@text='" + string + "']";
-        LOGGER.info("xpath:"+xpathString);
+        LOGGER.info("xpath:" + xpathString);
         ExtendedWebElement filterButton = elementFactory
-                .findByXpath(xpathString, string + "FilterBtn",filtersRecyclerView);
+                .findByXpath(xpathString, string + "FilterBtn", filtersRecyclerView);
         return filterButton;
     }
 
     public void scrollToElement(String string) {
-        while(!filtersRecyclerView.isVisible(1)){
+        while (!filtersRecyclerView.isVisible(1)) {
             scroll("Backward");
         }
-       swipe(findFilterButton(string),filtersRecyclerView,Direction.LEFT,10);
+        swipe(findFilterButton(string), filtersRecyclerView, Direction.LEFT, 10);
     }
 
     public Boolean isFilterButtonVisible(String string) {
         return findFilterButton(string).isVisible(1);
     }
 
-    public void scroll(String string){
+    public void scroll(String string) {
         getDriver().findElement(
                 MobileBy.AndroidUIAutomator(
                         "new UiScrollable(new UiSelector().scrollable(true))" +
-                                ".scroll"+string+"()"
+                                ".scroll" + string + "()"
                 )
         );
     }
 
-    public void scrollFilters(Direction direction){
-        swipe(filtersRecyclerView,direction);
+    public void scrollFilters(Direction direction) {
+        swipe(filtersRecyclerView, direction);
     }
 }

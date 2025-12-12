@@ -22,7 +22,7 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.denyNotifications();
         CommonUtils.pause(1);
-        SearchResultsPageBase searchResultsPage=homePage.search("java");
+        SearchResultsPageBase searchResultsPage = homePage.search("java");
         Assert.assertTrue(searchResultsPage.getSearchBarText().equals("java"));
     }
 
@@ -31,13 +31,13 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.denyNotifications();
         CommonUtils.pause(1);
-        SearchResultsPageBase searchResultsPage=homePage.search("programming");
+        SearchResultsPageBase searchResultsPage = homePage.search("programming");
         CommonUtils.pause(1);
         scroll("Backward");
         searchResultsPage.clickFilter("Shorts");
         CommonUtils.pause(2);
-        FilterComponent filterComponent=searchResultsPage.getFilterComponent();
-        ExtendedWebElement shortsBtn=filterComponent.findFilterButton("Shorts");
+        FilterComponent filterComponent = searchResultsPage.getFilterComponent();
+        ExtendedWebElement shortsBtn = filterComponent.findFilterButton("Shorts");
         Assert.assertTrue(filterComponent.findFilterButton("Shorts").getAttribute("selected").equals("true"));
     }
 
@@ -46,18 +46,18 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.denyNotifications();
         CommonUtils.pause(1);
-        SearchResultsPageBase searchResultsPage=homePage.search("programming");
-        FilterComponent filterComponent=searchResultsPage.getFilterComponent();
+        SearchResultsPageBase searchResultsPage = homePage.search("programming");
+        FilterComponent filterComponent = searchResultsPage.getFilterComponent();
         filterComponent.scrollToElement("Live");
         CommonUtils.pause(3);
         Assert.assertTrue(filterComponent.isFilterButtonVisible("Live"));
     }
 
-    public void scroll(String string){
+    public void scroll(String string) {
         getDriver().findElement(
                 MobileBy.AndroidUIAutomator(
                         "new UiScrollable(new UiSelector().scrollable(true))" +
-                                ".scroll"+string+"()"
+                                ".scroll" + string + "()"
                 )
         );
     }

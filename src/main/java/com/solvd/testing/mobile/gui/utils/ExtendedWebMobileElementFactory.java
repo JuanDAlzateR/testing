@@ -13,7 +13,7 @@ public class ExtendedWebMobileElementFactory {
     }
 
     public ExtendedWebElement findByXpath(String xpathExpression, String name, SearchContext searchContext) {
-        return new ExtendedWebElement(By.xpath(xpathExpression), name,driver, searchContext);
+        return new ExtendedWebElement(By.xpath(xpathExpression), name, driver, searchContext);
     }
 
 }

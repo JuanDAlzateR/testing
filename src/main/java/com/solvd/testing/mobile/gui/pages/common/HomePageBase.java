@@ -11,6 +11,7 @@ public abstract class HomePageBase extends AbstractPage {
     }
 
     public abstract void denyNotifications();
+
     public abstract SearchResultsPageBase search(String string);
 
 

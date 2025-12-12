@@ -30,32 +30,33 @@ public class SearchResultsPage extends SearchResultsPageBase {
 
     @Override
     public void clickFilter(String string) {
-       filterComponent.clickFilter(string);
+        filterComponent.clickFilter(string);
     }
 
     @Override
     public void scrollToElement(String string) {
-        while(!filterComponent.isVisible(1)){
+        while (!filterComponent.isVisible(1)) {
             scroll("Backward");
         }
         filterComponent.scrollToElement(string);
     }
 
-    public void scroll(String string){
+    public void scroll(String string) {
         getDriver().findElement(
                 MobileBy.AndroidUIAutomator(
                         "new UiScrollable(new UiSelector().scrollable(true))" +
-                                ".scroll"+string+"()"
+                                ".scroll" + string + "()"
                 )
         );
     }
 
     @Override
-    public FilterComponent getFilterComponent(){
+    public FilterComponent getFilterComponent() {
         return filterComponent;
     }
+
     @Override
-    public String getSearchBarText(){
+    public String getSearchBarText() {
         return searchBar.getText();
     }
 }
