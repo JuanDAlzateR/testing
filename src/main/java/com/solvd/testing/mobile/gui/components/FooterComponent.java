@@ -27,4 +27,16 @@ public class FooterComponent extends BaseComponent {
         homeBtn.click();
     }
 
+    public void clickShorts() {
+        shortsBtn.click();
+    }
+
+    public void clickSubscriptions() {
+        subscriptionsBtn.click();
+    }
+
+    public void clickYou() {
+        youBtn.click();
+    }
+
 }

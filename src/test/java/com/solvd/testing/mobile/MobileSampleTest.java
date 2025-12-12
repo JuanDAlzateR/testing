@@ -1,5 +1,7 @@
 package com.solvd.testing.mobile;
 
+import com.solvd.testing.mobile.gui.components.FooterComponent;
+import com.solvd.testing.mobile.gui.pages.android.HomePage;
 import com.solvd.testing.mobile.gui.pages.common.HomeScreenBase;
 import com.solvd.testing.mobile.gui.pages.common.WelcomePageBase;
 import com.zebrunner.agent.core.annotation.TestLabel;
@@ -18,6 +20,15 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils {
     public void testTapYoutubeButton() {
         HomeScreenBase homeScreen = initPage(getDriver(), HomeScreenBase.class);
         WelcomePageBase welcomePage=homeScreen.clickYoutubeButton();
+    }
+
+    @Test()
+    @TestLabel(name = "feature", value = {"mobile", "regression"})
+    public void testTapShortsButton() {
+        HomePage homePage=initPage(getDriver(),HomePage.class);
+        FooterComponent footerComponent=new FooterComponent(getDriver());
+        homePage.denyNotifications();
+
     }
 
     @Test()
