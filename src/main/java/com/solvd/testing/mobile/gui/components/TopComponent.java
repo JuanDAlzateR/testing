@@ -1,13 +1,14 @@
 package com.solvd.testing.mobile.gui.components;
 
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class TopComponent extends BaseComponent {
 
-    public TopComponent(WebDriver driver) {
-        super(driver);
+    public TopComponent(WebDriver driver, SearchContext searchContext) {
+        super(driver, searchContext);
     }
 
     @FindBy(xpath = "//android.widget.Button[@content-desc='Cast. Disconnected']")

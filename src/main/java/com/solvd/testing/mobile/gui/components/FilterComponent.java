@@ -2,13 +2,14 @@ package com.solvd.testing.mobile.gui.components;
 
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class FilterComponent extends BaseComponent {
 
-    public FilterComponent(WebDriver driver) {
-        super(driver);
+    public FilterComponent(WebDriver driver, SearchContext searchContext) {
+        super(driver,searchContext);
     }
 //android.support.v7.widget.RecyclerView[@content-desc="filters"]
 

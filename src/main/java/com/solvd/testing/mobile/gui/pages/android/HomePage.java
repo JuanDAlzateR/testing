@@ -21,11 +21,11 @@ import java.time.Duration;
 @DeviceType(pageType = Type.ANDROID_PHONE, parentClass = HomePageBase.class)
 public class HomePage extends HomePageBase {
 
-    TopComponent topComponent;
+    @FindBy(id = "com.google.android.youtube:id/toolbar_container")
+    private TopComponent topComponent;
 
     public HomePage(WebDriver driver) {
         super(driver);
-        this.topComponent=new TopComponent(driver);
     }
 
     @FindBy(id = "com.android.permissioncontroller:id/permission_deny_button")

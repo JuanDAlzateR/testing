@@ -5,6 +5,7 @@ import com.solvd.testing.gui.utils.ExtendedWebElementFactory;
 import com.zebrunner.carina.utils.common.CommonUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
+import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 
 public abstract class BaseComponent extends AbstractUIObject {
@@ -12,8 +13,8 @@ public abstract class BaseComponent extends AbstractUIObject {
     protected ElementActions actions;
     protected ExtendedWebElementFactory elementFactory;
 
-    public BaseComponent(WebDriver driver) {
-        super(driver);
+    public BaseComponent(WebDriver driver, SearchContext searchContext) {
+        super(driver, searchContext);
         this.actions = new ElementActions(driver);
         this.elementFactory = new ExtendedWebElementFactory(driver);
     }

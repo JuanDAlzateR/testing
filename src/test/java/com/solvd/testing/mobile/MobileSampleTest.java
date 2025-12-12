@@ -30,8 +30,7 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils {
     @TestLabel(name = "feature", value = {"mobile", "regression"})
     public void testTapShortsButton() {
         HomePage homePage=initPage(getDriver(),HomePage.class);
-        FooterComponent footerComponent=new FooterComponent(getDriver());
-        homePage.denyNotifications();
+
 
     }
 
