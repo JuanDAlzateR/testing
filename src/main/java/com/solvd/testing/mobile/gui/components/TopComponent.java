@@ -10,16 +10,16 @@ public class TopComponent extends BaseComponent {
         super(driver);
     }
 
-    @FindBy(id = "//android.widget.Button[@content-desc='Cast. Disconnected']")
+    @FindBy(xpath = "//android.widget.Button[@content-desc='Cast. Disconnected']")
     private ExtendedWebElement castBtn;
 
-    @FindBy(id = "//android.widget.ImageView[@content-desc='Notifications']")
+    @FindBy(xpath = "//android.widget.ImageView[@content-desc='Notifications']")
     private ExtendedWebElement notificationsBtn;
 
-    @FindBy(id = "//android.widget.ImageView[@content-desc='Search']")
+    @FindBy(xpath = "//android.widget.ImageView[@content-desc='Search']")
     private ExtendedWebElement searchBtn;
 
-    @FindBy(id = "//android.widget.ImageView[@content-desc='Settings']")
+    @FindBy(xpath = "//android.widget.ImageView[@content-desc='Settings']")
     private ExtendedWebElement settingsBtn;
 
     public void clickCast() {

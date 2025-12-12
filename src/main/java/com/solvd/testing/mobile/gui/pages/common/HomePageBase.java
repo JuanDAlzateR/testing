@@ -9,5 +9,5 @@ public abstract class HomePageBase extends AbstractPage {
         super(driver);
     }
     public abstract void denyNotifications();
-
+    public abstract void search(String string);
 }

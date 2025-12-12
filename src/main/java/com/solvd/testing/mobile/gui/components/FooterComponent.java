@@ -1,11 +1,12 @@
 package com.solvd.testing.mobile.gui.components;
 
+import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class FooterComponent extends BaseComponent {
+public class FooterComponent extends BaseComponent implements IMobileUtils {
 
     public FooterComponent(WebDriver driver) {
         super(driver);

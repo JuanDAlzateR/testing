@@ -2,11 +2,13 @@ package com.solvd.testing.mobile;
 
 import com.solvd.testing.mobile.gui.components.FooterComponent;
 import com.solvd.testing.mobile.gui.pages.android.HomePage;
+import com.solvd.testing.mobile.gui.pages.common.HomePageBase;
 import com.solvd.testing.mobile.gui.pages.common.HomeScreenBase;
 import com.solvd.testing.mobile.gui.pages.common.WelcomePageBase;
 import com.zebrunner.agent.core.annotation.TestLabel;
 import com.zebrunner.carina.core.IAbstractTest;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
+import com.zebrunner.carina.utils.common.CommonUtils;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
@@ -17,9 +19,11 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils {
 
     @Test()
     @TestLabel(name = "feature", value = {"mobile", "regression"})
-    public void testTapYoutubeButton() {
-        HomeScreenBase homeScreen = initPage(getDriver(), HomeScreenBase.class);
-        WelcomePageBase welcomePage=homeScreen.clickYoutubeButton();
+    public void search() {
+        HomePageBase homePage=initPage(getDriver(), HomePageBase.class);
+        homePage.denyNotifications();
+        CommonUtils.pause(1);
+        homePage.search("java");
     }
 
     @Test()
