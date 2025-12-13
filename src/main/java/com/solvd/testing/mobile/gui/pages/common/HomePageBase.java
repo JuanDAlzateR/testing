@@ -6,7 +6,7 @@ import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import io.appium.java_client.MobileBy;
 import org.openqa.selenium.WebDriver;
 
-public abstract class HomePageBase extends AbstractPage {
+public abstract class HomePageBase extends PageBase {
 
     public HomePageBase(WebDriver driver) {
         super(driver);

@@ -14,8 +14,12 @@ import io.appium.java_client.MobileBy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.time.Duration;
 
 public class MobileSampleTest implements IAbstractTest, IMobileUtils {
     public static final Logger LOGGER = LogManager.getLogger(MobileSampleTest.class);
@@ -66,8 +70,14 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils {
         CommonUtils.pause(6);
         shortsPageBase.swipe();
         CommonUtils.pause(3);
+        ExtendedWebElement currentShort=shortsPageBase.getCurrentShort();
         shortsPageBase.swipe();
-        CommonUtils.pause(3);
+//        CommonUtils.pause(3);
+        new WebDriverWait(getDriver(), Duration.ofSeconds(5))
+                .until(ExpectedConditions.stalenessOf(currentShort.getElement()));
+
+        Assert.assertTrue(true, "Short changed successfully");
+
         shortsPageBase.swipe();
         CommonUtils.pause(3);
 

@@ -8,6 +8,7 @@ import com.zebrunner.carina.utils.factory.DeviceType.Type;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import io.appium.java_client.MobileBy;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -28,6 +29,9 @@ public class ShortsPage extends ShortsPageBase implements IMobileUtils {
 
     @FindBy(id = "com.google.android.youtube:id/reel_player_page_container")
     private ExtendedWebElement reelContainer;
+
+    @FindBy(id = "com.google.android.youtube:id/reel_recycler")
+    private ExtendedWebElement reelRecycler;
 
     @FindBy(xpath = "//android.support.v7.widget.RecyclerView[@resource-id=\"com.google.android.youtube:id/results\"]")
     private ExtendedWebElement resultsList;
@@ -56,6 +60,14 @@ public class ShortsPage extends ShortsPageBase implements IMobileUtils {
 
         swipe(startx,starty,endx,endy,1000);
     }
+
+    @Override
+    public ExtendedWebElement getCurrentShort() {
+        return elementFactory.findByXpath("//android.widget.FrameLayout[@resource-id=\"com.google.android.youtube:id/reel_player_page_container\"]","currentShort",reelRecycler);
+    }
+    ///  .//android.view.ViewGroup[@resource-id='com.google.android.youtube:id/reel_player_page_container']
+
+
 
 
 }
