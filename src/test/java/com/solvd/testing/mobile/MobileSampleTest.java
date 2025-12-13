@@ -1,8 +1,10 @@
 package com.solvd.testing.mobile;
 
 import com.solvd.testing.mobile.gui.components.FilterComponent;
+import com.solvd.testing.mobile.gui.components.FooterComponent;
 import com.solvd.testing.mobile.gui.pages.common.HomePageBase;
 import com.solvd.testing.mobile.gui.pages.common.SearchResultsPageBase;
+import com.solvd.testing.mobile.gui.pages.common.ShortsPageBase;
 import com.zebrunner.carina.core.IAbstractTest;
 import com.zebrunner.carina.utils.common.CommonUtils;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
@@ -11,6 +13,7 @@ import io.appium.java_client.MobileBy;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Dimension;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -52,6 +55,38 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils {
         CommonUtils.pause(3);
         Assert.assertTrue(filterComponent.isFilterButtonVisible("Live"));
     }
+
+    @Test(testName = "Verify search and filters", description = "verifies shorts page and swipes a few videos")
+    public void verifyShortsPage() {
+        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
+        homePage.denyNotifications();
+        CommonUtils.pause(1);
+        FooterComponent footerComponent=homePage.getFooterComponent();
+        ShortsPageBase shortsPageBase=footerComponent.clickShorts();
+        CommonUtils.pause(6);
+        shortsPageBase.swipe();
+        CommonUtils.pause(3);
+        shortsPageBase.swipe();
+        CommonUtils.pause(3);
+        shortsPageBase.swipe();
+        CommonUtils.pause(3);
+
+    }
+
+    @Test(testName = "Verify search and filters", description = "verifies shorts page and swipes a few videos")
+    public void screenSize() {
+        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
+        homePage.denyNotifications();
+        CommonUtils.pause(1);
+
+        Dimension size = getDriver().manage().window().getSize();
+
+        int width = size.getWidth();
+        int height = size.getHeight();
+        LOGGER.info("width:"+width+" height:"+height);
+
+    }
+
 
     public void scroll(String string) {
         getDriver().findElement(

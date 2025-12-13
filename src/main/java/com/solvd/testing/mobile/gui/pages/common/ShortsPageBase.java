@@ -8,5 +8,6 @@ public abstract class ShortsPageBase extends AbstractPage {
     public ShortsPageBase(WebDriver driver) {
         super(driver);
     }
+    public abstract void swipe();
 
 }

@@ -1,5 +1,9 @@
 package com.solvd.testing.mobile.gui.components;
 
+import com.solvd.testing.mobile.gui.pages.common.HomePageBase;
+import com.solvd.testing.mobile.gui.pages.common.ShortsPageBase;
+import com.solvd.testing.mobile.gui.pages.common.SubscriptionsPageBase;
+import com.solvd.testing.mobile.gui.pages.common.YouPageBase;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
@@ -13,32 +17,36 @@ public class FooterComponent extends BaseComponent implements IMobileUtils {
         super(driver, searchContext);
     }
 
-    @FindBy(id = "//android.widget.Button[@content-desc='Home']")
+    @FindBy(xpath = "//android.widget.Button[@content-desc='Home']")
     private ExtendedWebElement homeBtn;
 
-    @FindBy(id = "//android.widget.Button[@content-desc='Shorts']")
+    @FindBy(xpath = "//android.widget.Button[@content-desc='Shorts']")
     private ExtendedWebElement shortsBtn;
 
-    @FindBy(id = "//android.widget.Button[@content-desc='Subscriptions']")
+    @FindBy(xpath = "//android.widget.Button[@content-desc='Subscriptions']")
     private ExtendedWebElement subscriptionsBtn;
 
-    @FindBy(id = "//android.widget.Button[@content-desc='You']")
+    @FindBy(xpath = "//android.widget.Button[@content-desc='You']")
     private ExtendedWebElement youBtn;
 
-    public void clickHome() {
+    public HomePageBase clickHome() {
         homeBtn.click();
+        return initPage(getDriver(),HomePageBase.class);
     }
 
-    public void clickShorts() {
+    public ShortsPageBase clickShorts() {
         shortsBtn.click();
+        return initPage(getDriver(), ShortsPageBase.class);
     }
 
-    public void clickSubscriptions() {
+    public SubscriptionsPageBase clickSubscriptions() {
         subscriptionsBtn.click();
+        return initPage(getDriver(), SubscriptionsPageBase.class);
     }
 
-    public void clickYou() {
+    public YouPageBase clickYou() {
         youBtn.click();
+        return initPage(getDriver(), YouPageBase.class);
     }
 
 }
