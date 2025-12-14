@@ -29,6 +29,8 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.denyNotifications();
         CommonUtils.pause(1);
+        homePage.chooseAccount();
+        CommonUtils.pause(1);
         SearchResultsPageBase searchResultsPage = homePage.search("java");
         Assert.assertTrue(searchResultsPage.getSearchBarText().equals("java"));
     }

@@ -20,4 +20,7 @@ public abstract class HomePageBase extends PageBase {
 
     public abstract FooterComponent getFooterComponent();
 
+    public abstract void chooseAccount();
+
+    public abstract void initialize();
 }
