@@ -1,8 +1,10 @@
 package com.solvd.testing.mobile;
 
 import com.solvd.testing.mobile.gui.components.FilterComponent;
+import com.solvd.testing.mobile.gui.components.FooterComponent;
 import com.solvd.testing.mobile.gui.pages.common.HomePageBase;
 import com.solvd.testing.mobile.gui.pages.common.SearchResultsPageBase;
+import com.solvd.testing.mobile.gui.pages.common.ShortsPageBase;
 import com.zebrunner.carina.core.IAbstractTest;
 import com.zebrunner.carina.utils.common.CommonUtils;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
@@ -11,8 +13,14 @@ import io.appium.java_client.MobileBy;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.time.Duration;
+import java.util.List;
 
 public class MobileSampleTest implements IAbstractTest, IMobileUtils {
     public static final Logger LOGGER = LogManager.getLogger(MobileSampleTest.class);
@@ -20,8 +28,7 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils {
     @Test(testName = "Verify search", description = "verifies search for a string")
     public void verifySearchFromHomePage() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
-        homePage.denyNotifications();
-        CommonUtils.pause(1);
+        homePage.initialize();
         SearchResultsPageBase searchResultsPage = homePage.search("java");
         Assert.assertTrue(searchResultsPage.getSearchBarText().equals("java"));
     }
@@ -29,8 +36,7 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils {
     @Test(testName = "Verify search and filters", description = "verifies search and apply filter")
     public void verifySearchAndApplyFilter() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
-        homePage.denyNotifications();
-        CommonUtils.pause(1);
+        homePage.initialize();
         SearchResultsPageBase searchResultsPage = homePage.search("programming");
         CommonUtils.pause(1);
         scroll("Backward");
@@ -44,13 +50,45 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils {
     @Test(testName = "Verify search and filters", description = "verifies search and swipe looking for an previously unseen filter")
     public void verifySearchAndSwipeToUnseenFilter() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
-        homePage.denyNotifications();
-        CommonUtils.pause(1);
+        homePage.initialize();
         SearchResultsPageBase searchResultsPage = homePage.search("programming");
         FilterComponent filterComponent = searchResultsPage.getFilterComponent();
         filterComponent.scrollToElement("Live");
         CommonUtils.pause(3);
         Assert.assertTrue(filterComponent.isFilterButtonVisible("Live"));
+    }
+
+    @Test(testName = "Verify open and swipe shorts", description = "verifies shorts page and swipes a few videos")
+    public void verifyShortsPage() {
+        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
+        homePage.initialize();
+        FooterComponent footerComponent = homePage.getFooterComponent();
+        ShortsPageBase shortsPage = footerComponent.clickShorts();
+        CommonUtils.pause(3);
+        shortsPage.swipe();
+        CommonUtils.pause(2);
+        shortsPage.tap();
+        CommonUtils.pause(1);
+//        System.out.println(getDriver().getPageSource()); //to get the xml page source directly from the smartphone
+        String videoProgress = shortsPage.getVideoProgress();
+        shortsPage.swipe();
+        CommonUtils.pause(5);
+        shortsPage.tap();
+        CommonUtils.pause(1);
+        Assert.assertNotEquals(videoProgress, shortsPage.getVideoProgress(), "ERROR: didn't swipe to a new short");
+
+    }
+
+    public void screenSize() {
+        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
+        homePage.initialize();
+
+        Dimension size = getDriver().manage().window().getSize();
+
+        int width = size.getWidth();
+        int height = size.getHeight();
+        LOGGER.info("width:" + width + " height:" + height);
+
     }
 
     public void scroll(String string) {

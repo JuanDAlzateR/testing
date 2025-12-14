@@ -4,7 +4,7 @@ import com.solvd.testing.mobile.gui.components.FilterComponent;
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 
-public abstract class SearchResultsPageBase extends AbstractPage {
+public abstract class SearchResultsPageBase extends PageBase {
 
     public SearchResultsPageBase(WebDriver driver) {
         super(driver);

@@ -1,10 +1,12 @@
 package com.solvd.testing.mobile.gui.pages.common;
 
+import com.solvd.testing.mobile.gui.components.FooterComponent;
+import com.solvd.testing.mobile.gui.components.TopComponent;
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import io.appium.java_client.MobileBy;
 import org.openqa.selenium.WebDriver;
 
-public abstract class HomePageBase extends AbstractPage {
+public abstract class HomePageBase extends PageBase {
 
     public HomePageBase(WebDriver driver) {
         super(driver);
@@ -14,5 +16,11 @@ public abstract class HomePageBase extends AbstractPage {
 
     public abstract SearchResultsPageBase search(String string);
 
+    public abstract TopComponent getTopComponent();
 
+    public abstract FooterComponent getFooterComponent();
+
+    public abstract void chooseAccount();
+
+    public abstract void initialize();
 }
