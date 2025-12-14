@@ -30,15 +30,26 @@ public class ShortsPage extends ShortsPageBase implements IMobileUtils {
     @FindBy(id = "com.google.android.youtube:id/reel_player_page_container")
     private ExtendedWebElement reelContainer;
 
+    @FindBy(id = "com.google.android.youtube:id/reel_player_footer_container")
+    private ExtendedWebElement reelFooterContainer;
+
     @FindBy(id = "com.google.android.youtube:id/reel_recycler")
     private ExtendedWebElement reelRecycler;
+
+    @FindBy(id = "com.google.android.youtube:id/reel_progress_bar")
+    private ExtendedWebElement reelProgressBar;
 
     @FindBy(xpath = "//android.support.v7.widget.RecyclerView[@resource-id=\"com.google.android.youtube:id/results\"]")
     private ExtendedWebElement resultsList;
 
+    @FindBy(xpath = "//android.widget.SeekBar[@class=\"android.widget.SeekBar\"]")
+    private ExtendedWebElement seekBar;
+
     @FindBy(id = "com.google.android.youtube:id/search_query")
     private ExtendedWebElement searchBar;
 
+    @FindBy(xpath = "//android.view.ViewGroup[contains(@content-desc,'View')]")
+    private ExtendedWebElement commentsBtn;
 
     public void scroll(String string) {
         getDriver().findElement(
@@ -48,7 +59,6 @@ public class ShortsPage extends ShortsPageBase implements IMobileUtils {
                 )
         );
     }
-
 
     @Override
     public void swipe() {
@@ -62,11 +72,35 @@ public class ShortsPage extends ShortsPageBase implements IMobileUtils {
     }
 
     @Override
+    public void tap() {
+//        swipeInContainer(reelContainer,Direction.UP,400); //duration it's in milliseconds
+//        int startx= size.getWidth()/2;
+//        int starty= size.getHeight()/2;
+//        tap(startx,starty,350);
+        reelContainer.click();
+    }
+
+    @Override
     public ExtendedWebElement getCurrentShort() {
         return elementFactory.findByXpath("//android.widget.FrameLayout[@resource-id=\"com.google.android.youtube:id/reel_player_page_container\"]","currentShort",reelRecycler);
     }
     ///  .//android.view.ViewGroup[@resource-id='com.google.android.youtube:id/reel_player_page_container']
 
+    @Override
+    public String getNumberOfComments() {
+        ExtendedWebElement comments=elementFactory.findByXpath("//android.view.ViewGroup[contains(@content-desc,'View')]","comments",reelFooterContainer);
+        return comments.getAttribute("content-desc");
+    }
+
+
+    public String getNumbeomments() {
+        ExtendedWebElement comments=elementFactory.findByXpath("//android.view.ViewGroup[contains(@content-desc,'View')]","comments",reelFooterContainer);
+        return comments.getAttribute("content-desc");
+    }
+
+    public String getVideoProgress() {
+        return seekBar.getAttribute("content-desc");
+    }
 
 
 

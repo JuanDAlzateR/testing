@@ -13,13 +13,14 @@ import io.appium.java_client.MobileBy;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.Dimension;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.List;
 
 public class MobileSampleTest implements IAbstractTest, IMobileUtils {
     public static final Logger LOGGER = LogManager.getLogger(MobileSampleTest.class);
@@ -27,10 +28,7 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils {
     @Test(testName = "Verify search", description = "verifies search for a string")
     public void verifySearchFromHomePage() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
-        homePage.denyNotifications();
-        CommonUtils.pause(1);
-        homePage.chooseAccount();
-        CommonUtils.pause(1);
+        homePage.initialize();
         SearchResultsPageBase searchResultsPage = homePage.search("java");
         Assert.assertTrue(searchResultsPage.getSearchBarText().equals("java"));
     }
@@ -38,8 +36,7 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils {
     @Test(testName = "Verify search and filters", description = "verifies search and apply filter")
     public void verifySearchAndApplyFilter() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
-        homePage.denyNotifications();
-        CommonUtils.pause(1);
+        homePage.initialize();
         SearchResultsPageBase searchResultsPage = homePage.search("programming");
         CommonUtils.pause(1);
         scroll("Backward");
@@ -53,8 +50,7 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils {
     @Test(testName = "Verify search and filters", description = "verifies search and swipe looking for an previously unseen filter")
     public void verifySearchAndSwipeToUnseenFilter() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
-        homePage.denyNotifications();
-        CommonUtils.pause(1);
+        homePage.initialize();
         SearchResultsPageBase searchResultsPage = homePage.search("programming");
         FilterComponent filterComponent = searchResultsPage.getFilterComponent();
         filterComponent.scrollToElement("Live");
@@ -65,31 +61,48 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils {
     @Test(testName = "Verify search and filters", description = "verifies shorts page and swipes a few videos")
     public void verifyShortsPage() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
-        homePage.denyNotifications();
-        CommonUtils.pause(1);
+        homePage.initialize();
         FooterComponent footerComponent=homePage.getFooterComponent();
-        ShortsPageBase shortsPageBase=footerComponent.clickShorts();
-        CommonUtils.pause(6);
-        shortsPageBase.swipe();
+        ShortsPageBase shortsPage=footerComponent.clickShorts();
         CommonUtils.pause(3);
-        ExtendedWebElement currentShort=shortsPageBase.getCurrentShort();
-        shortsPageBase.swipe();
-//        CommonUtils.pause(3);
+        shortsPage.swipe();
+        CommonUtils.pause(3);
+        shortsPage.tap();
+        CommonUtils.pause(1);
+//        System.out.println(getDriver().getPageSource());
+        String videoProgress=shortsPage.getVideoProgress();
+        LOGGER.info(videoProgress);
+        shortsPage.swipe();
+        CommonUtils.pause(3);
+//        Assert.assertNotEquals(comments, shortsPage.getNumberOfComments(),"ERROR: didn't swipe to a new short");
+
+
+    }
+    @Test
+    public void verifyShortSwipe() {
+        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
+        homePage.initialize();
+        FooterComponent footerComponent=homePage.getFooterComponent();
+        ShortsPageBase shortsPage=footerComponent.clickShorts();
+        CommonUtils.pause(3);
+        shortsPage.swipe();
+
+        WebElement progressBefore = getDriver().findElement(
+                By.id("com.google.android.youtube:id/reel_progress_bar")
+        );
+
+        shortsPage.swipe();
+
         new WebDriverWait(getDriver(), Duration.ofSeconds(5))
-                .until(ExpectedConditions.stalenessOf(currentShort.getElement()));
+                .until(ExpectedConditions.stalenessOf(progressBefore));
 
         Assert.assertTrue(true, "Short changed successfully");
-
-        shortsPageBase.swipe();
-        CommonUtils.pause(3);
-
     }
 
     @Test(testName = "Verify search and filters", description = "verifies shorts page and swipes a few videos")
     public void screenSize() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
-        homePage.denyNotifications();
-        CommonUtils.pause(1);
+        homePage.initialize();
 
         Dimension size = getDriver().manage().window().getSize();
 

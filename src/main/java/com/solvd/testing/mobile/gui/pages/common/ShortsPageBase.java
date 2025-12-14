@@ -11,5 +11,7 @@ public abstract class ShortsPageBase extends PageBase {
     }
     public abstract void swipe();
     public abstract ExtendedWebElement getCurrentShort();
-
+    public abstract String getNumberOfComments();
+    public abstract void tap();
+    public abstract String getVideoProgress();
 }
