@@ -9,9 +9,14 @@ public abstract class ShortsPageBase extends PageBase {
     public ShortsPageBase(WebDriver driver) {
         super(driver);
     }
+
     public abstract void swipe();
+
     public abstract ExtendedWebElement getCurrentShort();
+
     public abstract String getNumberOfComments();
+
     public abstract void tap();
+
     public abstract String getVideoProgress();
 }

@@ -58,48 +58,27 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils {
         Assert.assertTrue(filterComponent.isFilterButtonVisible("Live"));
     }
 
-    @Test(testName = "Verify search and filters", description = "verifies shorts page and swipes a few videos")
+    @Test(testName = "Verify open and swipe shorts", description = "verifies shorts page and swipes a few videos")
     public void verifyShortsPage() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.initialize();
-        FooterComponent footerComponent=homePage.getFooterComponent();
-        ShortsPageBase shortsPage=footerComponent.clickShorts();
+        FooterComponent footerComponent = homePage.getFooterComponent();
+        ShortsPageBase shortsPage = footerComponent.clickShorts();
         CommonUtils.pause(3);
         shortsPage.swipe();
-        CommonUtils.pause(3);
+        CommonUtils.pause(2);
         shortsPage.tap();
         CommonUtils.pause(1);
-//        System.out.println(getDriver().getPageSource());
-        String videoProgress=shortsPage.getVideoProgress();
-        LOGGER.info(videoProgress);
+//        System.out.println(getDriver().getPageSource()); //to get the xml page source directly from the smartphone
+        String videoProgress = shortsPage.getVideoProgress();
         shortsPage.swipe();
-        CommonUtils.pause(3);
-//        Assert.assertNotEquals(comments, shortsPage.getNumberOfComments(),"ERROR: didn't swipe to a new short");
-
+        CommonUtils.pause(5);
+        shortsPage.tap();
+        CommonUtils.pause(1);
+        Assert.assertNotEquals(videoProgress, shortsPage.getVideoProgress(), "ERROR: didn't swipe to a new short");
 
     }
-    @Test
-    public void verifyShortSwipe() {
-        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
-        homePage.initialize();
-        FooterComponent footerComponent=homePage.getFooterComponent();
-        ShortsPageBase shortsPage=footerComponent.clickShorts();
-        CommonUtils.pause(3);
-        shortsPage.swipe();
 
-        WebElement progressBefore = getDriver().findElement(
-                By.id("com.google.android.youtube:id/reel_progress_bar")
-        );
-
-        shortsPage.swipe();
-
-        new WebDriverWait(getDriver(), Duration.ofSeconds(5))
-                .until(ExpectedConditions.stalenessOf(progressBefore));
-
-        Assert.assertTrue(true, "Short changed successfully");
-    }
-
-    @Test(testName = "Verify search and filters", description = "verifies shorts page and swipes a few videos")
     public void screenSize() {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.initialize();
@@ -108,10 +87,9 @@ public class MobileSampleTest implements IAbstractTest, IMobileUtils {
 
         int width = size.getWidth();
         int height = size.getHeight();
-        LOGGER.info("width:"+width+" height:"+height);
+        LOGGER.info("width:" + width + " height:" + height);
 
     }
-
 
     public void scroll(String string) {
         getDriver().findElement(

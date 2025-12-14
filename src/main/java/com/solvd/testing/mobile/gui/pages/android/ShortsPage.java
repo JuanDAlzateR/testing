@@ -18,10 +18,11 @@ import org.openqa.selenium.support.FindBy;
 public class ShortsPage extends ShortsPageBase implements IMobileUtils {
 
     public Dimension size;
+
     public ShortsPage(WebDriver driver) {
         super(driver);
         Dimension size = driver.manage().window().getSize();
-        this.size=size;
+        this.size = size;
     }
 
     @FindBy(id = "com.google.android.youtube:id/nerd_stats_container")
@@ -63,12 +64,12 @@ public class ShortsPage extends ShortsPageBase implements IMobileUtils {
     @Override
     public void swipe() {
 //        swipeInContainer(reelContainer,Direction.UP,400); //duration it's in milliseconds
-        int startx= size.getWidth()/2;
-        int starty= (int) (size.getHeight()*0.60);
-        int endx=startx;
-        int endy=0;
+        int startx = size.getWidth() / 2;
+        int starty = (int) (size.getHeight() * 0.60);
+        int endx = startx;
+        int endy = 0;
 
-        swipe(startx,starty,endx,endy,1000);
+        swipe(startx, starty, endx, endy, 1000);
     }
 
     @Override
@@ -82,26 +83,26 @@ public class ShortsPage extends ShortsPageBase implements IMobileUtils {
 
     @Override
     public ExtendedWebElement getCurrentShort() {
-        return elementFactory.findByXpath("//android.widget.FrameLayout[@resource-id=\"com.google.android.youtube:id/reel_player_page_container\"]","currentShort",reelRecycler);
+        return elementFactory.findByXpath("//android.widget.FrameLayout[@resource-id=\"com.google.android.youtube:id/reel_player_page_container\"]", "currentShort", reelRecycler);
     }
+
     ///  .//android.view.ViewGroup[@resource-id='com.google.android.youtube:id/reel_player_page_container']
 
     @Override
     public String getNumberOfComments() {
-        ExtendedWebElement comments=elementFactory.findByXpath("//android.view.ViewGroup[contains(@content-desc,'View')]","comments",reelFooterContainer);
+        ExtendedWebElement comments = elementFactory.findByXpath("//android.view.ViewGroup[contains(@content-desc,'View')]", "comments", reelFooterContainer);
         return comments.getAttribute("content-desc");
     }
 
 
     public String getNumbeomments() {
-        ExtendedWebElement comments=elementFactory.findByXpath("//android.view.ViewGroup[contains(@content-desc,'View')]","comments",reelFooterContainer);
+        ExtendedWebElement comments = elementFactory.findByXpath("//android.view.ViewGroup[contains(@content-desc,'View')]", "comments", reelFooterContainer);
         return comments.getAttribute("content-desc");
     }
 
     public String getVideoProgress() {
         return seekBar.getAttribute("content-desc");
     }
-
 
 
 }

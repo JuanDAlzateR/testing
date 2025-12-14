@@ -31,7 +31,7 @@ public class FooterComponent extends BaseComponent implements IMobileUtils {
 
     public HomePageBase clickHome() {
         homeBtn.click();
-        return initPage(getDriver(),HomePageBase.class);
+        return initPage(getDriver(), HomePageBase.class);
     }
 
     public ShortsPageBase clickShorts() {

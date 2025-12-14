@@ -65,8 +65,8 @@ public class HomePage extends HomePageBase {
 
     @Override
     public void chooseAccount() {
-        if (accounts.size()>0 && accounts.get(0).isVisible()) {
-           accounts.get(0).click();
+        if (accounts.size() > 0 && accounts.get(0).isVisible()) {
+            accounts.get(0).click();
         }
     }
 
